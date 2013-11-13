@@ -11,17 +11,12 @@ var options = {
 };
 
 //
-// Create a standalone HTTPS proxy server
-//
-// httpProxy.createServer(8000, 'localhost', options).listen(8001);
-
-//
 // Create an instance of HttpProxy to use with another HTTPS server
 //
 var proxy = new httpProxy.HttpProxy({
   target: {
     host: 'localhost', 
-    port: 3000
+    port: 4000
   }
 });
 
@@ -29,15 +24,3 @@ https.createServer(options.https, function (req, res) {
   proxy.proxyRequest(req, res)
 }).listen(8002);
 
-// https.createServer(function (req, res) {
-//   proxy.proxyRequest(req, res)
-// }).listen(8002);
-
-//
-// Create the target HTTPS server for both cases
-//
-// http.createServer(function (req, res) {
-//   res.writeHead(200, { 'Content-Type': 'text/plain' });
-//   res.write('hello https\n');
-//   res.end();
-// }).listen(8000);
